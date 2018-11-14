@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "server": "node -r esm server.js",
+    "server:dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.2.0",
+    "esm": "^3.0.84",
+    "faker": "^4.1.0",
+    "graphql": "^14.0.2",
+    "nodemon": "^1.18.6"
+  }
+}
