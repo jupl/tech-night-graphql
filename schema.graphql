@@ -1,0 +1,72 @@
+type Query {
+  version: String!
+  company(id: ID!): Company
+  companies(country: String): [Company!]!
+  employee(id: ID!): Employee
+  employees: [Employee!]!
+  team(id: ID!): Team
+  teams: [Team!]!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  slogan: String!
+  phone: String!
+  founded: String!
+  country: String!
+  email: String!
+  website: String!
+  employees: [Employee!]!
+}
+
+type Employee {
+  id: ID!
+  lastName: String!
+  firstName: String!
+  title: String!
+  phone: String!
+  profile: String!
+  avatar: String!
+  salary: String!
+  company: Company!
+  teams: [Team!]!
+}
+
+type Team {
+  id: ID!
+  name: String!
+  employees: [Employee!]!
+}
+
+type Mutation {
+  addCompany(company: NewCompany!): Company!
+  addEmployee(employee: NewEmployee!): Employee!
+  addTeam(team: NewTeam!): Team!
+}
+
+input NewCompany {
+  name: String!
+  slogan: String!
+  phone: String!
+  founded: String!
+  country: String!
+  email: String!
+  website: String!
+}
+
+input NewEmployee {
+  lastName: String!
+  firstName: String!
+  title: String!
+  phone: String!
+  profile: String!
+  avatar: String!
+  salary: String!
+  companyId: ID!
+}
+
+input NewTeam {
+  name: String!
+  employeeIds: [ID!]
+}
