@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>TechNight: GraphQL</title>
+<meta name="author" content="(Juan Placencia)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/simple.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '//cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<style>.reveal.reveal img{padding:16px;max-height:67vh}</style>
+<meta name="robots" content="noindex"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">TechNight: GraphQL</h1><h2 class="author">Juan Placencia</h2><h2 class="date">November 15, 2018</h2>
+</section>
+
+</section>
+</section>
+<section>
+<section id="slide-org2a84348">
+<h3 id="org2a84348">Description</h3>
+<p>
+Building APIs and services is easy to start. However, it takes effort in design, consistency, maintenance, discipline, and more in the long term for a quality product. Over time there have been different implementations, best practices, architectures. <a href="https://graphql.org/">GraphQL</a> is an open-source data query and manipulation language, and a runtime for fulfilling queries with existing data. In this tech night we will talk about:
+</p>
+<ul>
+<li>What GraphQL is and is not</li>
+<li>Example implementations</li>
+<li>View some comparisons to REST</li>
+<li>Create a basic implementation of a GraphQL server</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org80c7a90">
+<h2 id="org80c7a90">GraphQL: What?</h2>
+<div class="outline-text-2" id="text-org80c7a90">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org319a4b9">
+<h3 id="org319a4b9">Examples</h3>
+<ul>
+<li>GitHub: <a href="https://developer.github.com/v4/explorer/">https://developer.github.com/v4/explorer/</a></li>
+<li>Pokemon: <a href="https://graphql-pokemon.now.sh/">https://graphql-pokemon.now.sh/</a></li>
+<li>Spotify: <a href="https://spotify-api-graphql-console.herokuapp.com/">https://spotify-api-graphql-console.herokuapp.com/</a></li>
+<li>Star Wars: <a href="https://graphql.org/swapi-graphql/">https://graphql.org/swapi-graphql/</a></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org0b5f86c">
+<h3 id="org0b5f86c">What is GraphQL</h3>
+<ul>
+<li>Open source data query and manipulation language</li>
+<li>Flexible communication
+<ul>
+<li>Typically single HTTP endpoint with response in JSON</li>
+<li>Subscriptions via WebSocket, Server Sent Events, etc.</li>
+
+</ul></li>
+<li>Language/platform agnostic with sophisticated tooling</li>
+<li>Can be used in conjunction with existing libraries/practices</li>
+<li>Comparable to and (can be) considered an alternative to REST</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgc1814fa">
+<h3 id="orgc1814fa">GraphQL Origins</h3>
+<ul>
+<li>Born from Facebook circa 2012</li>
+<li>Questions and discussions regarding server/client relationship
+<ul>
+<li>Differences in how data was stored versus what clients wanted</li>
+<li>API flexibility with multiple clients</li>
+<li>Data driven and designed (graph-like)</li>
+
+</ul></li>
+<li><a href="https://code.fb.com/core-data/graphql-a-data-query-language/">https://code.fb.com/core-data/graphql-a-data-query-language/</a></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org5af267b">
+<h3 id="org5af267b">GraphQL Information</h3>
+<ul>
+<li>Learn:
+<ul>
+<li><a href="https://graphql.org/learn/">https://graphql.org/learn/</a></li>
+<li><a href="https://www.howtographql.com/">https://www.howtographql.com/</a></li>
+
+</ul></li>
+<li>Foundation: <a href="https://gql.foundation/">https://gql.foundation/</a></li>
+<li>Resources: <a href="https://github.com/chentsulin/awesome-graphql">https://github.com/chentsulin/awesome-graphql</a></li>
+<li>Users: <a href="https://graphql.org/users/">https://graphql.org/users/</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga817c81">
+<h2 id="orga817c81">GraphQL: Where?</h2>
+<div class="outline-text-2" id="text-orga817c81">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org339df3e">
+<h3 id="org339df3e">Interface to a DB</h3>
+
+<div class="figure">
+<p><img src="./assets/architecture-db.png" alt="architecture-db.png" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org5bf8bfd">
+<h3 id="org5bf8bfd">Interface to services</h3>
+
+<div class="figure">
+<p><img src="./assets/architecture-services.png" alt="architecture-services.png" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org45c79a1">
+<h3 id="org45c79a1">Interface to hybrid</h3>
+
+<div class="figure">
+<p><img src="./assets/architecture-hybrid.png" alt="architecture-hybrid.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org34d5d3b">
+<h2 id="org34d5d3b">Let's talk about REST</h2>
+<div class="outline-text-2" id="text-org34d5d3b">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org31af4a8">
+<h3 id="org31af4a8">Before we begin</h3>
+<ul>
+<li>GraphQL is not always a replacement to REST</li>
+<li>There are use cases where REST is fine</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org4ddf6ef">
+<h3 id="org4ddf6ef">A simple scenario</h3>
+<ul>
+<li>Let's say we have 3 resources
+<ul>
+<li>Books</li>
+<li>Authors</li>
+<li>Categories</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org44f6e6d">
+<h3 id="org44f6e6d">Strict resource structure</h3>
+<ul>
+<li>ex:
+<ul>
+<li><code>/books</code></li>
+<li><code>/authors/42</code></li>
+<li><code>/categories</code></li>
+
+</ul></li>
+<li>Maintain simplicity, resources are straightforward</li>
+<li>Consumer(s) is now responsible for potential business logic</li>
+<li>Consumer(s) may need to make multiple calls and round trips</li>
+<li>Risk of fetching unused data</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org70ab97b">
+<h3 id="org70ab97b">Adding variations to query</h3>
+<ul>
+<li>ex:
+<ul>
+<li><code>/categories/12/books</code></li>
+<li><code>/categories/fantasy/authors</code></li>
+<li><code>/books?category=fantasy&amp;author=42</code></li>
+
+</ul></li>
+<li>Consumer(s) is still for responsible for advanced business logic</li>
+<li>Consumer(s) may need to make multiple calls and round trips</li>
+<li>Risk of fetching unused data</li>
+<li>Queries? Subresources? Both? What's the true approach?</li>
+<li>If not using queries, how much nesting and order?</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org06038c2">
+<h3 id="org06038c2">Custom endpoints</h3>
+<ul>
+<li>ex:
+<ul>
+<li><code>/books/suggestions?where=Where's%20Wa</code></li>
+<li><code>/books/newReleasesOnSaleForYoungAdults</code></li>
+<li><code>/books/iPhoneData</code></li>
+<li><code>/books?app=storeapp</code></li>
+
+</ul></li>
+<li>Business logic can be abstracted out of consumer(s)</li>
+<li>Number of calls and round trips can be reduced drastically</li>
+<li>More endpoints or complicated endpoints</li>
+<li>Potential abuse complicates architecture and maintainability</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga05aa9d">
+<h3 id="orga05aa9d">REST can get too abstract</h3>
+<ul>
+<li>Additional rules (should) be established</li>
+<li>Consistency in design, documentation, maintenance, etc.</li>
+<li>Risk of inflexibility</li>
+<li>Contract between server and client?</li>
+<li>What about live updates and feeds?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org723119b">
+<h2 id="org723119b">GraphQL: Why?</h2>
+<div class="outline-text-2" id="text-org723119b">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org983354e">
+<h3 id="org983354e">Why GraphQL</h3>
+<ul>
+<li>Queries are data driven and flexible</li>
+<li>Agnostic to data sources</li>
+<li>Strong type system and schema defines contract</li>
+<li>Great with an iterative and evolving process</li>
+<li>Subscriptions</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org6e198a8">
+<h3 id="org6e198a8">Why not GraphQL</h3>
+<ul>
+<li>Resources are small and simple</li>
+<li>Flexibility is not required or leveraged</li>
+<li>Data not easily represented as a graph</li>
+<li>Single and/or simple clients</li>
+<li>TL;DR: Overkill</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org388a7eb">
+<h2 id="org388a7eb">GraphQL: How?</h2>
+<div class="outline-text-2" id="text-org388a7eb">
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd2a010f">
+<h3 id="orgd2a010f">Hands on</h3>
+<ul>
+<li><a href="https://github.com/jupl/tech-night-graphql">https://github.com/jupl/tech-night-graphql</a></li>
+<li>Presentation available</li>
+<li>Examples available in different branches</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="//cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="//cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: false,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: '//cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: '//cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '//cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: '//cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: '//cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

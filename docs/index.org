@@ -1,0 +1,124 @@
+#+TITLE: TechNight: GraphQL
+#+AUTHOR: Juan Placencia
+#+DATE: November 15, 2018
+#+OPTIONS: h:2 author:t toc:nil num:nil timestamp:nil reveal_slide_number:nil
+#+BEAMER_THEME: metropolis
+#+LATEX_CLASS_OPTIONS: [aspectratio=169,noslidenumbers,presentation,smaller]
+#+REVEAL_HEAD_PREAMBLE: <style>.reveal.reveal img{padding:16px;max-height:67vh}</style>
+#+REVEAL_HEAD_PREAMBLE: <meta name="robots" content="noindex"/>
+#+REVEAL_HLEVEL: 2
+#+REVEAL_ROOT: //cdn.jsdelivr.net/reveal.js/3.0.0/
+#+REVEAL_THEME: simple
+#+REVEAL_TRANS: slide
+
+** Description
+Building APIs and services is easy to start. However, it takes effort in design, consistency, maintenance, discipline, and more in the long term for a quality product. Over time there have been different implementations, best practices, architectures. [[https://graphql.org/][GraphQL]] is an open-source data query and manipulation language, and a runtime for fulfilling queries with existing data. In this tech night we will talk about:
+- What GraphQL is and is not
+- Example implementations
+- View some comparisons to REST
+- Create a basic implementation of a GraphQL server
+
+* GraphQL: What?
+** Examples
+- GitHub: https://developer.github.com/v4/explorer/
+- Pokemon: https://graphql-pokemon.now.sh/
+- Spotify: https://spotify-api-graphql-console.herokuapp.com/
+- Star Wars: https://graphql.org/swapi-graphql/
+** What is GraphQL
+- Open source data query and manipulation language
+- Flexible communication
+  - Typically single HTTP endpoint with response in JSON
+  - Subscriptions via WebSocket, Server Sent Events, etc.
+- Language/platform agnostic with sophisticated tooling
+- Can be used in conjunction with existing libraries/practices
+- Comparable to and (can be) considered an alternative to REST
+** GraphQL Origins
+- Born from Facebook circa 2012
+- Questions and discussions regarding server/client relationship
+  - Differences in how data was stored versus what clients wanted
+  - API flexibility with multiple clients
+  - Data driven and designed (graph-like)
+- https://code.fb.com/core-data/graphql-a-data-query-language/
+** GraphQL Information
+- Learn:
+  - https://graphql.org/learn/
+  - https://www.howtographql.com/
+- Foundation: https://gql.foundation/
+- Resources: https://github.com/chentsulin/awesome-graphql
+- Users: https://graphql.org/users/
+
+* GraphQL: Where?
+** Interface to a DB
+#+ATTR_LATEX: :width 0.8\textwidth
+[[./assets/architecture-db.png]]
+** Interface to services
+#+ATTR_LATEX: :height 0.8\textheight
+[[./assets/architecture-services.png]]
+** Interface to hybrid
+#+ATTR_LATEX: :height 0.8\textheight
+[[./assets/architecture-hybrid.png]]
+
+* Let's talk about REST
+** Before we begin
+- GraphQL is not always a replacement to REST
+- There are use cases where REST is fine
+** A simple scenario
+- Let's say we have 3 resources
+  - Books
+  - Authors
+  - Categories
+** Strict resource structure
+- ex:
+  - ~/books~
+  - ~/authors/42~
+  - ~/categories~
+- Maintain simplicity, resources are straightforward
+- Consumer(s) is now responsible for potential business logic
+- Consumer(s) may need to make multiple calls and round trips
+- Risk of fetching unused data
+** Adding variations to query
+- ex:
+  - ~/categories/12/books~
+  - ~/categories/fantasy/authors~
+  - ~/books?category=fantasy&author=42~
+- Consumer(s) is still for responsible for advanced business logic
+- Consumer(s) may need to make multiple calls and round trips
+- Risk of fetching unused data
+- Queries? Subresources? Both? What's the true approach?
+- If not using queries, how much nesting and order?
+** Custom endpoints
+- ex:
+  - ~/books/suggestions?where=Where's%20Wa~
+  - ~/books/newReleasesOnSaleForYoungAdults~
+  - ~/books/iPhoneData~
+  - ~/books?app=storeapp~
+- Business logic can be abstracted out of consumer(s)
+- Number of calls and round trips can be reduced drastically
+- More endpoints or complicated endpoints
+- Potential abuse complicates architecture and maintainability
+** REST can get too abstract
+- Additional rules (should) be established
+- Consistency in design, documentation, maintenance, etc.
+- Risk of inflexibility
+- Contract between server and client?
+- What about live updates and feeds?
+
+* GraphQL: Why?
+** Why GraphQL
+- Queries are data driven and flexible
+- Agnostic to data sources
+- Strong type system and schema defines contract
+- Great with an iterative and evolving process
+- Subscriptions
+** Why not GraphQL
+- Resources are small and simple
+- Flexibility is not required or leveraged
+- Data not easily represented as a graph
+- Single and/or simple clients
+- TL;DR: Overkill
+
+* GraphQL: How?
+** Hands on
+- https://github.com/jupl/tech-night-graphql
+- Presentation available
+- Examples available in different branches

@@ -1,0 +1,41 @@
+#+HTML: <h1>TechNight <sub><sub><sub>GraphQL</sub></sub></sub></h1>
+
+** About
+These are all the resources for the tech night on [[https://graphql.org/][GraphQL]].
+
+** Presentation
+Presentation is available [[https://jupl.github.io/tech-night-graphql/][here]].
+
+** Example Project
+Example project is available in different branches as noted below. Example is using [[https://www.apollographql.com/docs/apollo-server/][Apollo Server]].
+
+*** Prerequisites
+- [[https://nodejs.org/en/][Node.js]] is required (latest LTS preferred)
+- [[https://git-scm.com/][Git]] to clone this repository
+- Configurations for [[https://code.visualstudio.com/][Visual Studio Code]] are bundled
+
+*** Download
+You can download a ZIP from this repository at the top. Remember to download the right branch. You can also use Git:
+#+BEGIN_EXAMPLE
+git clone https://github.com/jupl/tech-night-graphql
+cd tech-night-graphql
+git checkout 01-initial  # or 02-simple etc.
+#+END_EXAMPLE
+
+*** Install
+#+BEGIN_EXAMPLE
+npm install              # Required for first time only if using Git
+npm run server:dev       # Server is running on port 3000
+#+END_EXAMPLE
+
+*** Branches
+Links to example project are here as follows:
+1. [[https://github.com/jupl/tech-night-graphql/tree/01-initial][Initial]]
+2. [[https://github.com/jupl/tech-night-graphql/tree/02-simple][Simple]]
+3. [[https://github.com/jupl/tech-night-graphql/tree/03-data][Data]]
+4. [[https://github.com/jupl/tech-night-graphql/tree/04-params][Params]]
+5. [[https://github.com/jupl/tech-night-graphql/tree/05-relationships][Relationships]]
+6. [[https://github.com/jupl/tech-night-graphql/tree/06-mutations][Mutations]]
+7. [[https://github.com/jupl/tech-night-graphql/tree/07-context][Context]]
+8. [[https://github.com/jupl/tech-night-graphql/tree/08-auth][Auth]]
+9. [[https://github.com/jupl/tech-night-graphql/tree/09-subscriptions][Subscriptions]]
