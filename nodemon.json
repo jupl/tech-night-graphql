@@ -1,0 +1,9 @@
+{
+  "execMap": {
+    "js": "node --inspect -r esm"
+  },
+  "watch": [
+    "**/*.js",
+    "**/*.graphql"
+  ]
+}
