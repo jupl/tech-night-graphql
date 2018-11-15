@@ -1,0 +1,5 @@
+type Subscription {
+  newCompany: Company!
+  newEmployee(company: ID): Employee!
+  newTeam: Team!
+}
