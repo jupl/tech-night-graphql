@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug",
+      "restart": true,
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "server:dev"
+      ],
+      "port": 9229
+    }
+  ]
+}
