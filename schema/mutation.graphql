@@ -1,0 +1,33 @@
+type Mutation {
+  addCompany(company: NewCompany!): Company!
+  addEmployee(employee: NewEmployee!): Employee!
+  addTeam(team: NewTeam!): Team!
+  authorize: Boolean
+  unauthorize: Boolean
+}
+
+input NewCompany {
+  name: String!
+  slogan: String!
+  phone: String!
+  founded: String!
+  country: String!
+  email: String!
+  website: String!
+}
+
+input NewEmployee {
+  lastName: String!
+  firstName: String!
+  title: String!
+  phone: String!
+  profile: String!
+  avatar: String!
+  salary: String!
+  companyId: ID!
+}
+
+input NewTeam {
+  name: String!
+  employeeIds: [ID!]
+}
